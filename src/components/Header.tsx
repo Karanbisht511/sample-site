@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, Settings } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { ChevronDown, Menu, Settings } from "lucide-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeNavItem, setActiveNavItem] = useState('Home');
+  const activeNavItem = "Home";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const navItems = [
-    { name: 'Home', link: '#' },
-    { name: 'About Us', link: '#' },
-    { name: 'Services', link: '#' },
-    { name: 'Blog', link: '#' },
-    { name: 'Portfolio', link: '#', hasDropdown: true },
-    { name: 'Elements', link: '#', hasDropdown: true }
+    { name: "Home", link: "#" },
+    { name: "About Us", link: "#" },
+    { name: "Services", link: "#" },
+    { name: "Blog", link: "#" },
+    { name: "Portfolio", link: "#", hasDropdown: true },
+    { name: "Elements", link: "#", hasDropdown: true },
   ];
 
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY < lastScrollY || currentScrollY < 100) {
         // Scrolling UP or at top of page
         setIsVisible(true);
@@ -29,22 +29,22 @@ const Header = () => {
         // Close mobile menu if open
         setIsMobileMenuOpen(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', controlNavbar);
-    
+    window.addEventListener("scroll", controlNavbar);
+
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', controlNavbar);
+      window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
 
   return (
-    <header 
+    <header
       className={`fixed w-full bg-gray-900 transition-transform duration-300 z-50 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       {/* Desktop Navigation */}
@@ -62,13 +62,11 @@ const Header = () => {
                 key={item.name}
                 href={item.link}
                 className={`flex items-center text-white hover:text-orange-500 transition-colors ${
-                  activeNavItem === item.name ? 'text-orange-500' : ''
+                  activeNavItem === item.name ? "text-orange-500" : ""
                 }`}
               >
                 {item.name}
-                {item.hasDropdown && (
-                  <ChevronDown className="ml-1 w-4 h-4" />
-                )}
+                {item.hasDropdown && <ChevronDown className="ml-1 w-4 h-4" />}
               </a>
             ))}
             <button className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition-colors">
@@ -100,7 +98,7 @@ const Header = () => {
               <div className="absolute left-6 top-4">
                 <Settings className="w-5 h-5 text-gray-500" />
               </div>
-              
+
               {/* Navigation Items */}
               <nav className="space-y-4">
                 {navItems.map((item) => (
@@ -111,13 +109,13 @@ const Header = () => {
                     <a
                       href={item.link}
                       className={`flex items-center justify-between ${
-                        item.name === 'HOME' ? 'text-white bg-orange-500 -mx-6 px-6 py-2' : 'text-gray-900'
+                        item.name === "HOME"
+                          ? "text-white bg-orange-500 -mx-6 px-6 py-2"
+                          : "text-gray-900"
                       }`}
                     >
                       {item.name.toUpperCase()}
-                      {item.hasDropdown && (
-                        <ChevronDown className="w-4 h-4" />
-                      )}
+                      {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
                     </a>
                   </div>
                 ))}

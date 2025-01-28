@@ -75,3 +75,33 @@
   width: 25%;
   font-weight: 100;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.overflow-x-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-x-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
