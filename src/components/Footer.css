@@ -103,3 +103,18 @@ ol {
     /* height: 20%; */
   }
 }
+
+@media (max-width: 999px) {
+  .footer-company {
+    display: block;
+  }
+
+  .footer-company-details {
+    display: block;
+  }
+
+  .footer {
+    display: block;
+    /* height: 20%; */
+  }
+}
