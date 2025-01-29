@@ -23,10 +23,10 @@ const ContactUs: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const resToken = await axios.get("http://localhost:5000/generateToken");
+      const resToken = await axios.get("https://site-backend-rho.vercel.app/generateToken");
 
       const res = await axios.post(
-        "http://localhost:5000/send-email",
+        "https://site-backend-rho.vercel.app/send-email",
         formData,
         {
           headers: {
