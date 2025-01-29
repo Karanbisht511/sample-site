@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import brandDev from "../asset/brandDevelopment.jpeg";
 import contentDev from "../asset/contentDev.png";
 import graphicDes from "../asset/graphicD.avif";
@@ -7,8 +7,16 @@ import uxDes from "../asset/uxuiDev.webp";
 import appDev from "../asset/appDev.jpeg";
 import logoDes from "../asset/logoDes.jpeg";
 
+interface Service {
+  title: string;
+  light: boolean;
+  image: string;
+  alt: string;
+}
+
 const ServicesGrid = () => {
-  const services = [
+  // Convert services to state
+  const [services, setServices] = useState<Service[]>([
     {
       title: "Brand Development",
       light: true,
@@ -57,11 +65,34 @@ const ServicesGrid = () => {
       image: logoDes,
       alt: "Creative advertising campaign examples",
     },
-  ];
+  ]);
+
+  // Handle initial load and resize
+  useEffect(() => {
+    const updateServicesForScreenSize = () => {
+      const isMobile = window.innerWidth < 1025;
+      
+      setServices(currentServices => 
+        currentServices.map(service => ({
+          ...service,
+          light: isMobile ? true : service.light
+        }))
+      );
+    };
+
+    // Run once on mount
+    updateServicesForScreenSize();
+
+    // Add resize listener
+    window.addEventListener("resize", updateServicesForScreenSize);
+    
+    // Cleanup
+    return () => window.removeEventListener("resize", updateServicesForScreenSize);
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, index) => (
           <div
             key={index}

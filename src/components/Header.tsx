@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronDown, Menu, Settings } from "lucide-react";
+import { Link } from "react-router";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -8,11 +9,11 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const navItems = [
-    { name: "Home", link: "#" },
-    { name: "About Us", link: "#" },
-    { name: "Services", link: "#" },
-    { name: "Blog", link: "#" },
-    { name: "Portfolio", link: "#", hasDropdown: true },
+    { name: "Home", link: "/" },
+    { name: "About Us", link: "/aboutus" },
+    { name: "Services", link: "/services" },
+    { name: "Blog", link: "/blog" },
+    { name: "Portfolio", link: "/portfolio", hasDropdown: true },
     { name: "Elements", link: "#", hasDropdown: true },
   ];
 
@@ -58,16 +59,16 @@ const Header = () => {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.link}
+                to={item.link}
                 className={`flex items-center text-white hover:text-orange-500 transition-colors ${
                   activeNavItem === item.name ? "text-orange-500" : ""
                 }`}
               >
                 {item.name}
                 {item.hasDropdown && <ChevronDown className="ml-1 w-4 h-4" />}
-              </a>
+              </Link>
             ))}
             <button className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition-colors">
               Contact Us
