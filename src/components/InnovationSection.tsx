@@ -1,37 +1,14 @@
-import React from "react";
-import { ChevronDown, ArrowRight } from "lucide-react";
-
-interface AccordionItemProps {
-  title: string;
-  isOpen?: boolean;
-  onClick?: () => void;
-}
-
-const AccordionItem: React.FC<AccordionItemProps> = ({
-  title,
-  isOpen = false,
-  onClick,
-}) => {
-  return (
-    <div className="border-t border-gray-200">
-      <button
-        onClick={onClick}
-        className="w-full py-4 flex justify-between items-center text-left"
-      >
-        <span className="text-xl font-medium">{title}</span>
-        <ChevronDown
-          className={`transform transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-    </div>
-  );
-};
+import React, { useState } from "react";
 
 const InnovationSection: React.FC = () => {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  const toggleAccordion = (section: string) => {
+    setExpanded(expanded === section ? null : section);
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col lg:flex-row gap-12 bg-white">
+    <section className="flex flex-wrap items-center justify-center gap-8 px-6 py-12 md:flex-nowrap md:gap-12 lg:px-24">
       {/* Left side with images */}
       <div className="lg:w-1/2 relative">
         <div className="aspect-square relative">
@@ -82,32 +59,55 @@ const InnovationSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Right side content */}
-      <div className="lg:w-1/2">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-[#1A1A1A]">
+      {/* Right: Content */}
+      <div className="max-w-lg">
+        <h2 className="text-3xl font-bold leading-snug md:text-4xl">
           Innovation to transform your organization.
-        </h1>
-        <p className="text-gray-600 mb-8">
-          Cras a elit sit amet leo accumsan volutpat. Suspendisse hendreriast
-          ehicula leo, vel efficitur felis ultrices non. Cras a elit sit amet
-          leo acun volutpat. Suspendisse hendrerit vehicula leo, vel efficitur
-          fel.
+        </h2>
+        <p className="mt-4 text-gray-700">
+          Cras a elit sit amet leo accumsan volutpat. Suspendisse hendrerit
+          vehicula leo, vel efficitur felis ultrices non.
         </p>
 
-        {/* Accordion sections */}
-        <div className="mb-8">
-          <AccordionItem title="What We Do" />
-          <AccordionItem title="Pro Experience" />
-          <AccordionItem title="Partners and Investors" />
+        {/* Accordion */}
+        <div className="mt-8 space-y-4">
+          {["What We Do", "Pro Experience", "Partners and Investors"].map(
+            (item, index) => (
+              <div
+                key={index}
+                className="border-b border-gray-300 cursor-pointer"
+              >
+                <div
+                  className="flex items-center justify-between py-4 text-lg font-medium text-gray-800"
+                  onClick={() => toggleAccordion(item)}
+                >
+                  {item}
+                  <span
+                    className={`transform transition-transform ${
+                      expanded === item ? "rotate-180" : ""
+                    }`}
+                  >
+                    ⌄
+                  </span>
+                </div>
+                {expanded === item && (
+                  <div className="px-4 pb-4 text-gray-600">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur pellentesque neque eget diam posuere porta.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )
+          )}
         </div>
 
-        {/* Learn More button */}
-        <button className="bg-[#FF5D38] text-black px-6 py-3 rounded flex items-center gap-2 hover:opacity-90 transition-opacity">
-          Learn More
-          <ArrowRight className="w-4 h-4" />
+        <button className="mt-6 inline-flex items-center gap-2 rounded-md bg-orange-500 px-6 py-3 text-white hover:bg-orange-600">
+          Learn More <span>→</span>
         </button>
       </div>
-    </div>
+    </section>
   );
 };
 
