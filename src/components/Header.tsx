@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Menu, Settings } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { Link } from "react-router";
 
 const Header = () => {
@@ -78,7 +78,7 @@ const Header = () => {
           {/* Mobile Menu Controls */}
           <div className="flex lg:hidden items-center space-x-4">
             <button className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition-colors">
-              Contact Us
+              <Link to="/contactus">Contact Us</Link>
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -95,11 +95,6 @@ const Header = () => {
         <div className="lg:hidden bg-white absolute w-full">
           <div className="container mx-auto px-6">
             <div className="py-4">
-              {/* Settings Icon */}
-              <div className="absolute left-6 top-4">
-                <Settings className="w-5 h-5 text-gray-500" />
-              </div>
-
               {/* Navigation Items */}
               <nav className="space-y-4">
                 {navItems.map((item) => (
