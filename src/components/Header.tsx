@@ -42,6 +42,11 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
+  // New function to handle link clicks
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed w-full bg-gray-900 transition-transform duration-300 z-50 ${
@@ -65,20 +70,21 @@ const Header = () => {
                 className={`flex items-center text-white hover:text-orange-500 transition-colors ${
                   activeNavItem === item.name ? "text-orange-500" : ""
                 }`}
+                onClick={handleLinkClick}
               >
                 {item.name}
                 {item.hasDropdown && <ChevronDown className="ml-1 w-4 h-4" />}
               </Link>
             ))}
             <button className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition-colors">
-              <Link to="/contactus">Contact Us</Link>
+              <Link to="/contactus" onClick={handleLinkClick}>Contact Us</Link>
             </button>
           </div>
 
           {/* Mobile Menu Controls */}
           <div className="flex lg:hidden items-center space-x-4">
             <button className="bg-orange-500 text-white px-6 py-2 hover:bg-orange-600 transition-colors">
-              <Link to="/contactus">Contact Us</Link>
+              <Link to="/contactus" onClick={handleLinkClick}>Contact Us</Link>
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -104,6 +110,7 @@ const Header = () => {
                   >
                     <Link
                       to={item.link}
+                      onClick={handleLinkClick}
                       className={`flex items-center justify-between ${
                         item.name === "HOME"
                           ? "text-white bg-orange-500 -mx-6 px-6 py-2"
