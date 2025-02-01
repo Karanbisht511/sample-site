@@ -67,17 +67,62 @@ const ServicesGrid = () => {
     },
   ]);
 
+  const mobileService = [
+    {
+      title: "Brand Development",
+      light: true,
+      image: brandDev,
+      alt: "Brand development illustration showing color palettes and typography",
+    },
+    {
+      title: "Content Marketing",
+      light: false,
+      image: contentDev,
+      alt: "Content marketing strategy visualization",
+    },
+    {
+      title: "Graphic Design",
+      light: false,
+      image: graphicDes,
+      alt: "Graphic design tools and artwork",
+    },
+    {
+      title: "Web Development",
+      light: true,
+      image: webdev,
+      alt: "Web development code and design interface",
+    },
+    {
+      title: "UX Design",
+      light: true,
+      image: uxDes,
+      alt: "UX design wireframes and prototypes",
+    },
+    {
+      title: "App Development",
+      light: false,
+      image: appDev,
+      alt: "Mobile app development interface",
+    },
+    {
+      title: "Logo Design",
+      light: false,
+      image: appDev,
+      alt: "Logo design process and examples",
+    },
+    {
+      title: "Creative Advertising",
+      light: true,
+      image: logoDes,
+      alt: "Creative advertising campaign examples",
+    },
+  ];
+
   // Handle initial load and resize
   useEffect(() => {
     const updateServicesForScreenSize = () => {
       const isMobile = window.innerWidth < 1025;
-      
-      setServices(currentServices => 
-        currentServices.map(service => ({
-          ...service,
-          light: isMobile ? true : service.light
-        }))
-      );
+      setServices(isMobile ? mobileService : services);
     };
 
     // Run once on mount
@@ -85,18 +130,19 @@ const ServicesGrid = () => {
 
     // Add resize listener
     window.addEventListener("resize", updateServicesForScreenSize);
-    
+
     // Cleanup
-    return () => window.removeEventListener("resize", updateServicesForScreenSize);
+    return () =>
+      window.removeEventListener("resize", updateServicesForScreenSize);
   }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {services.map((service, index) => (
           <div
             key={index}
-            className={`group relative p-6 rounded-lg transition-all duration-300 overflow-hidden min-h-[200px] ${
+            className={`group relative p-6 transition-all duration-300 overflow-hidden min-h-[200px] ${
               service.light ? "bg-gray-100" : "bg-white"
             }`}
           >
